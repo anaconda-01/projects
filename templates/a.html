@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% csrf_token %}
+{% block blockname %}
+
+    
+<style>
+    table,th,td,tr{
+        border: 1px solid black;
+        text-align: center;
+        font-size: 20px;
+
+    }
+  
+</style> 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var rows = document.querySelectorAll("tr");
+  
+      // Define the gotodetails function
+      function gotodetails(row) {
+        row.addEventListener("click", function() {
+          var link = this.querySelector("a");  // Find the anchor tag within the row
+          if (link) {
+            window.location.href = link.href; // Follow the linked URL if it exists
+          }
+        });
+      }
+  
+      // Call gotodetails for each row
+      rows.forEach(gotodetails);
+    });
+  </script>
+  
+       
+<div class="max-w-10xl items-center">
+    <a href="{% url 'lead_create' %}" class="flex h-12 w-full items-center justify-center bg-gray-800 text-white rounded-md px-4 font-medium hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+      Create New Lead
+    </a>
+  </div>
+  
+
+    
+    <div class="flex justify-center"style="font: size 20px">
+
+        <h1 style="font-size: 40px;">TOTAL ENTERIES</h1>
+    </div>
+    <div class="flex justify-center h-screen">
+
+        <div class="max-w-10xl items-center mx-auto w-full" style="color:white;">
+            <table class="h-screen w-full">
+                
+                <th>First_name</th>
+                <th>Last_name</th>
+                {% for l in lead  %}
+        
+
+                    
+                    <tr onclick="gotodetails()">
+                        <a href="/{{l.pk}}">
+                        <td><a href="/{{l.pk}}">{{l.first_name}}</a></td>
+                        <td><a href="/{{l.pk}}">{{l.last_name}}</a></td>
+                        
+                    </tr>   
+                    {% endfor %}
+                </table>
+                
+            </div>
+    </div>
+        
+        
+    
+{% endblock blockname %}
